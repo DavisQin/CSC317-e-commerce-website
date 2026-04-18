@@ -3,9 +3,9 @@
 ## Group Members
 | Name | GitHub Username |
 |------|----------------|
-| _(your name)_ | _(your handle)_ |
-| _(teammate)_ | _(their handle)_ |
-| _(teammate)_ | _(their handle)_ |
+| Lior Elbert | holyfield22 |
+| Davis Qin | DavisQin |
+
 
 ---
 
