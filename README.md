@@ -49,8 +49,8 @@ Each product object has the following fields:
 
 ```bash
 # 1. Clone the repo and switch to the correct branch
-git clone <your-repo-url>
-cd <repo-folder>
+git clone https://github.com/DavisQin/CSC317-e-commerce-website.git
+cd CSC317-e-commerce-website
 git checkout REST-api-HW
 
 # 2. Install dependencies
