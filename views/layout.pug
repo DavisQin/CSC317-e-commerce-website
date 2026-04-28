@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title || "Men's Clothing Store"
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    nav.navbar
+      a.brand(href='/') MenStyle
+      ul
+        li: a(href='/') Home
+        li: a(href='/products') Products
+        li: a(href='/cart') Cart
+        li: a(href='/login') Login
+
+    main.content
+      block content
+
+    footer
+      p &copy; 2024 MenStyle &mdash; CSC317 Group Project | Lior Elbert &amp; Davis Qin

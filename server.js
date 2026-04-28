@@ -1,14 +1,18 @@
 'use strict';
 
 const express = require('express');
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ── Middleware ──────────────────────────────────────────────────────────────
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ── Seed Data ───────────────────────────────────────────────────────────────
-// Each product has: id, name (identifier), category, brand, price, sizes, color, inStock
 let products = [
   {
     id: 1,
@@ -71,18 +75,15 @@ const VALID_CATEGORIES = [
   'pants', 'shorts', 'sweaters', 'coats', 'suits', 'accessories'
 ];
 
-// Normalize a product name: trim whitespace, lowercase
 function normalizeName(name) {
   return name.trim().toLowerCase();
 }
 
-// Find a product by name (case-insensitive)
 function findByName(name) {
   const normalized = normalizeName(name);
   return products.find(p => normalizeName(p.name) === normalized) || null;
 }
 
-// Validate the request body for a new product; returns array of error strings
 function validateProduct(body) {
   const errors = [];
 
@@ -117,22 +118,55 @@ function validateProduct(body) {
   return errors;
 }
 
-// ── Routes ───────────────────────────────────────────────────────────────────
+// ── View Routes (HTML pages) ──────────────────────────────────────────────────
 
-// HEAD / — return total product count in a custom header (no body)
-// Must be defined before GET / so Express doesn't absorb HEAD into the GET handler
-app.head('/', (req, res) => {
+app.get('/', (req, res) => {
+  res.render('home', { title: "Men's Clothing Store" });
+});
+
+app.get('/products', (req, res) => {
+  res.render('products', { title: 'All Products', products });
+});
+
+app.get('/products/:identifier', (req, res) => {
+  const product = findByName(req.params.identifier);
+  if (!product) {
+    return res.status(404).render('404', { title: 'Not Found', identifier: req.params.identifier });
+  }
+  res.render('product-detail', { title: product.name, product });
+});
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Login' });
+});
+
+app.post('/login', (req, res) => {
+  res.redirect('/');
+});
+
+app.get('/profile', (req, res) => {
+  res.render('profile', { title: 'My Profile' });
+});
+
+app.get('/cart', (req, res) => {
+  res.render('cart', { title: 'Shopping Cart' });
+});
+
+// ── API Routes (JSON) ─────────────────────────────────────────────────────────
+
+// HEAD /api/products — return total product count in a custom header
+app.head('/api/products', (req, res) => {
   res.set('X-Product-Count', String(products.length));
   res.status(200).end();
 });
 
-// GET / — return all products
-app.get('/', (req, res) => {
+// GET /api/products — return all products
+app.get('/api/products', (req, res) => {
   res.status(200).json(products);
 });
 
-// POST /add — create a new product
-app.post('/add', (req, res) => {
+// POST /api/products/add — create a new product
+app.post('/api/products/add', (req, res) => {
   const errors = validateProduct(req.body);
   if (errors.length > 0) {
     return res.status(400).json({ error: 'Validation failed', details: errors });
@@ -140,7 +174,6 @@ app.post('/add', (req, res) => {
 
   const normalizedName = normalizeName(req.body.name);
 
-  // 409 Conflict if a product with the same name already exists
   if (findByName(normalizedName)) {
     return res.status(409).json({ error: `Product "${normalizedName}" already exists.` });
   }
@@ -160,22 +193,22 @@ app.post('/add', (req, res) => {
   res.status(201).json(newProduct);
 });
 
-// GET /:name — retrieve a single product by name (case-insensitive)
-app.get('/:name', (req, res) => {
-  const product = findByName(req.params.name);
+// GET /api/products/:identifier — retrieve a single product by name
+app.get('/api/products/:identifier', (req, res) => {
+  const product = findByName(req.params.identifier);
   if (!product) {
-    return res.status(404).json({ error: `Product "${req.params.name}" not found.` });
+    return res.status(404).json({ error: `Product "${req.params.identifier}" not found.` });
   }
   res.status(200).json(product);
 });
 
-// DELETE /:name — remove a product by name (case-insensitive)
-app.delete('/:name', (req, res) => {
+// DELETE /api/products/:identifier — remove a product by name
+app.delete('/api/products/:identifier', (req, res) => {
   const index = products.findIndex(
-    p => normalizeName(p.name) === normalizeName(req.params.name)
+    p => normalizeName(p.name) === normalizeName(req.params.identifier)
   );
   if (index === -1) {
-    return res.status(404).json({ error: `Product "${req.params.name}" not found.` });
+    return res.status(404).json({ error: `Product "${req.params.identifier}" not found.` });
   }
   products.splice(index, 1);
   res.status(204).end();

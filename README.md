@@ -1,4 +1,4 @@
-# Men's Clothes REST API — CSC 317 Group Assignment
+# Men's Clothing Store — CSC 317 Group Assignment
 
 ## Group Members
 | Name | GitHub Username |
@@ -9,8 +9,8 @@
 
 ---
 
-## Product Description
-A simple in-memory REST API that manages a catalog of **men's clothing** items for an e-commerce store. The store sells jeans, shirts, jackets, pants, t-shirts, and more.
+## Project Description
+A men's clothing e-commerce web application built with Node.js + Express. It serves HTML pages rendered with **Pug** templates and exposes a JSON REST API for programmatic access. The store sells jeans, shirts, jackets, pants, t-shirts, and more.
 
 ---
 
@@ -49,9 +49,9 @@ Each product object has the following fields:
 
 ```bash
 # 1. Clone the repo and switch to the correct branch
-git clone <your-repo-url>
-cd <repo-folder>
-git checkout REST-api-HW
+git clone https://github.com/DavisQin/CSC317-e-commerce-website.git
+cd CSC317-e-commerce-website
+git checkout pug-templates-HW
 
 # 2. Install dependencies
 npm install
@@ -68,13 +68,31 @@ Set a `PORT` environment variable to override: `PORT=4000 npm start`
 
 ---
 
+## HTML Pages
+
+These routes serve rendered Pug templates.
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| `GET` | `/` | Home page |
+| `GET` | `/products` | All products listing |
+| `GET` | `/products/:name` | Single product detail page |
+| `GET` | `/login` | Login page |
+| `POST` | `/login` | Login form submission (redirects to `/`) |
+| `GET` | `/profile` | User profile page |
+| `GET` | `/cart` | Shopping cart page |
+
+---
+
 ## API Endpoints
 
-### `GET /`
+All JSON API routes are prefixed with `/api/products`.
+
+### `GET /api/products`
 Returns all products as a JSON array.
 
 ```bash
-curl http://localhost:3000/
+curl http://localhost:3000/api/products
 ```
 
 **Response 200**
@@ -87,11 +105,11 @@ curl http://localhost:3000/
 
 ---
 
-### `HEAD /`
+### `HEAD /api/products`
 Returns the total product count in the `X-Product-Count` response header. No body is returned.
 
 ```bash
-curl -I http://localhost:3000/
+curl -I http://localhost:3000/api/products
 ```
 
 **Response 200** (headers only)
@@ -101,12 +119,12 @@ X-Product-Count: 5
 
 ---
 
-### `GET /:name`
+### `GET /api/products/:name`
 Retrieves a single product by name. The lookup is **case-insensitive**.
 
 ```bash
-curl http://localhost:3000/slim%20fit%20jeans
-curl http://localhost:3000/Chino%20Pants
+curl http://localhost:3000/api/products/slim%20fit%20jeans
+curl http://localhost:3000/api/products/Chino%20Pants
 ```
 
 **Response 200**
@@ -121,11 +139,11 @@ curl http://localhost:3000/Chino%20Pants
 
 ---
 
-### `POST /add`
+### `POST /api/products/add`
 Creates a new product. All fields except `inStock` are required.
 
 ```bash
-curl -X POST http://localhost:3000/add \
+curl -X POST http://localhost:3000/api/products/add \
   -H "Content-Type: application/json" \
   -d '{
     "name": "athletic joggers",
@@ -167,11 +185,11 @@ curl -X POST http://localhost:3000/add \
 
 ---
 
-### `DELETE /:name`
+### `DELETE /api/products/:name`
 Removes a product by name. Case-insensitive. Returns **no body** on success.
 
 ```bash
-curl -X DELETE http://localhost:3000/chino%20pants
+curl -X DELETE http://localhost:3000/api/products/chino%20pants
 ```
 
 **Response 204** — deleted (no body)

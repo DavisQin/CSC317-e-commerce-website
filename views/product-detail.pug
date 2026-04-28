@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .product-detail
+    h1= product.name
+    table.detail-table
+      tr
+        th Brand
+        td= product.brand
+      tr
+        th Category
+        td= product.category
+      tr
+        th Price
+        td $#{product.price.toFixed(2)}
+      tr
+        th Color
+        td= product.color
+      tr
+        th Sizes
+        td= product.sizes.join(', ')
+      tr
+        th Availability
+        td
+          if product.inStock
+            span.badge.in-stock In Stock
+          else
+            span.badge.out-of-stock Out of Stock
+    a.btn(href='/products') Back to Products

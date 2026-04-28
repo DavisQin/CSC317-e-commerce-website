@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 All Products
+  .product-grid
+    each product in products
+      .product-card
+        h2: a(href='/products/' + encodeURIComponent(product.name))= product.name
+        p.brand= product.brand
+        p.price $#{product.price.toFixed(2)}
+        p.category Category: #{product.category}
+        if product.inStock
+          span.badge.in-stock In Stock
+        else
+          span.badge.out-of-stock Out of Stock

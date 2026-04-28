@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  .cart-container
+    h1 Shopping Cart
+    table.cart-table
+      thead
+        tr
+          th Item
+          th Price
+          th Qty
+          th Subtotal
+      tbody
+        tr
+          td Slim Fit Jeans
+          td $59.99
+          td 1
+          td $59.99
+        tr
+          td Oxford Button-Down Shirt
+          td $89.50
+          td 2
+          td $179.00
+        tr
+          td Graphic Crew Neck Tee
+          td $19.99
+          td 1
+          td $19.99
+    .cart-total
+      strong Total: $258.98
+    a.btn(href='/products') Continue Shopping
