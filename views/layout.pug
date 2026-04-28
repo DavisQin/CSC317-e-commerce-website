@@ -9,10 +9,10 @@ html(lang='en')
     nav.navbar
       a.brand(href='/') MenStyle
       ul
-        li: a(href='/') Home
-        li: a(href='/products') Products
-        li: a(href='/cart') Cart
-        li: a(href='/login') Login
+        li: a(href='/', class=title === "Men's Clothing Store" ? 'active' : '') Home
+        li: a(href='/products', class=title === 'All Products' ? 'active' : '') Products
+        li: a(href='/cart', class=title === 'Shopping Cart' ? 'active' : '') Cart
+        li: a(href='/login', class=title === 'Login' ? 'active' : '') Login
 
     main.content
       block content
