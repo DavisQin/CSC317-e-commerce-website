@@ -93,6 +93,7 @@ footer {
 
 .btn:hover {
     background-color: #16213e;
+    transform: scale(1.05);
 }
 
 
