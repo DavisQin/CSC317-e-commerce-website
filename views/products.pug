@@ -1,15 +1,35 @@
 extends layout
 
 block content
-  h1 All Products
-  .product-grid
-    each product in products
-      .product-card
-        h2: a(href='/products/' + encodeURIComponent(product.name))= product.name
-        p.brand= product.brand
-        p.price $#{product.price.toFixed(2)}
-        p.category Category: #{product.category}
-        if product.inStock
-          span.badge.in-stock In Stock
-        else
-          span.badge.out-of-stock Out of Stock
+  .products-header
+    h1 All Products
+
+  form.search-form(action='/products' method='GET')
+    if selectedCategory
+      input(type='hidden' name='category' value=selectedCategory)
+    input.search-input(type='text' name='q' placeholder='Search by name or brand...' value=searchQuery)
+    button.btn.btn-small(type='submit') Search
+
+  .category-filter
+    a(href='/products' class=(!selectedCategory ? 'filter-active' : '')) All
+    each cat in VALID_CATEGORIES
+      a(href='/products?category=' + cat class=(selectedCategory === cat ? 'filter-active' : ''))= cat
+
+  if products.length === 0
+    p.no-results No products found.
+  else
+    .product-grid
+      each product in products
+        .product-card
+          img.product-img(src=product.image_url || 'https://placehold.co/280x320/1a1a2e/ffffff?text=' + encodeURIComponent(product.name) alt=product.name)
+          .product-card-body
+            h2: a(href='/products/' + encodeURIComponent(product.name))= product.name
+            p.brand= product.brand
+            p.price $#{product.price.toFixed(2)}
+            if product.stock > 0
+              span.badge.in-stock In Stock
+              form(action='/cart/add' method='POST')
+                input(type='hidden' name='product_id' value=product.id)
+                button.btn.btn-add(type='submit') Add to Cart
+            else
+              span.badge.out-of-stock Out of Stock

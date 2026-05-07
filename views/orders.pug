@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 My Orders
+  if orders && orders.length
+    .orders-list
+      each order in orders
+        .order-card
+          .order-info
+            span.order-number Order ##{order.id}
+            span.order-date= new Date(order.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+            span.order-total $#{order.total.toFixed(2)}
+          a.btn.btn-small(href='/orders/' + order.id) View Details
+  else
+    p.empty-state You have not placed any orders yet.
+  a.btn(href='/products' style='margin-top:20px') Browse Products

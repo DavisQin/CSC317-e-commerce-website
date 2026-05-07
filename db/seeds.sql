@@ -1,0 +1,25 @@
+INSERT OR IGNORE INTO products (name, price, stock, brand, category, image_url) VALUES
+    ('slim fit jeans',          59.99,  15, 'Levi''s',           'jeans',       'https://placehold.co/280x320/1e3a5f/ffffff?text=Slim+Fit+Jeans'),
+    ('relaxed fit jeans',       49.99,  12, 'Wrangler',          'jeans',       'https://placehold.co/280x320/1e3a5f/ffffff?text=Relaxed+Fit+Jeans'),
+    ('skinny jeans',            39.99,  10, 'H&M',               'jeans',       'https://placehold.co/280x320/1e3a5f/ffffff?text=Skinny+Jeans'),
+    ('oxford button-down shirt',89.50,   8, 'Ralph Lauren',      'shirts',      'https://placehold.co/280x320/2d5a27/ffffff?text=Oxford+Shirt'),
+    ('flannel plaid shirt',     75.00,  10, 'Pendleton',         'shirts',      'https://placehold.co/280x320/2d5a27/ffffff?text=Flannel+Shirt'),
+    ('linen casual shirt',      39.90,  15, 'Uniqlo',            'shirts',      'https://placehold.co/280x320/2d5a27/ffffff?text=Linen+Shirt'),
+    ('classic white tee',       15.99,  25, 'Hanes',             't-shirts',    'https://placehold.co/280x320/8a4a3a/ffffff?text=White+Tee'),
+    ('graphic print tee',       22.00,  18, 'ASOS',              't-shirts',    'https://placehold.co/280x320/8a4a3a/ffffff?text=Graphic+Tee'),
+    ('v-neck cotton tee',       29.99,  20, 'Calvin Klein',      't-shirts',    'https://placehold.co/280x320/8a4a3a/ffffff?text=V-Neck+Tee'),
+    ('classic wool blazer',    249.00,   5, 'Hugo Boss',         'jackets',     'https://placehold.co/280x320/2d2750/ffffff?text=Wool+Blazer'),
+    ('leather biker jacket',   399.00,   4, 'Schott NYC',        'jackets',     'https://placehold.co/280x320/2d2750/ffffff?text=Biker+Jacket'),
+    ('windbreaker jacket',      89.95,  12, 'Nike',              'jackets',     'https://placehold.co/280x320/2d2750/ffffff?text=Windbreaker'),
+    ('chino pants',             55.00,  14, 'Dockers',           'pants',       'https://placehold.co/280x320/1a4a3c/ffffff?text=Chino+Pants'),
+    ('cargo pants',             65.00,  10, 'Carhartt',          'pants',       'https://placehold.co/280x320/1a4a3c/ffffff?text=Cargo+Pants'),
+    ('crewneck sweater',        45.00,  16, 'Gap',               'sweaters',    'https://placehold.co/280x320/5a3a1a/ffffff?text=Crewneck'),
+    ('cable knit sweater',      89.50,   8, 'J.Crew',            'sweaters',    'https://placehold.co/280x320/5a3a1a/ffffff?text=Cable+Knit'),
+    ('leather belt',            75.00,  20, 'Coach',             'accessories', 'https://placehold.co/280x320/3a1a4a/ffffff?text=Leather+Belt'),
+    ('wool scarf',             120.00,   9, 'Burberry',          'accessories', 'https://placehold.co/280x320/3a1a4a/ffffff?text=Wool+Scarf'),
+    ('two-piece suit',         399.00,   6, 'Calvin Klein',      'suits',       'https://placehold.co/280x320/1a1a2e/ffffff?text=Two-Piece+Suit'),
+    ('peacoat',                120.00,   7, 'H&M',               'coats',       'https://placehold.co/280x320/2e3a4a/ffffff?text=Peacoat'),
+    ('chino shorts',            65.00,  11, 'Polo Ralph Lauren', 'shorts',      'https://placehold.co/280x320/1a5c2d/ffffff?text=Chino+Shorts');
+
+INSERT OR IGNORE INTO users (username, email, password) VALUES
+    ('testuser', 'test@example.com', 'hashedpassword123');
