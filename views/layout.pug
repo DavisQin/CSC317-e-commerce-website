@@ -9,8 +9,8 @@ html(lang='en')
     nav.navbar
       a.brand(href='/') MenStyle
       ul
-        li: a(href='/') Home
-        li: a(href='/products') Products
+        li: a(href='/' class=(title === "Men's Clothing Store" ? 'active' : '')) Home
+        li: a(href='/products' class=(title === 'All Products' ? 'active' : '')) Products
         if currentUser
           li: a(href='/orders') My Orders
           li: a(href='/cart') Cart#{cartCount > 0 ? ' (' + cartCount + ')' : ''}
@@ -19,8 +19,8 @@ html(lang='en')
             form(action='/logout' method='POST' style='display:inline')
               button.btn-nav(type='submit') Logout
         else
-          li: a(href='/cart') Cart
-          li: a(href='/login') Login
+          li: a(href='/cart' class=(title === 'Shopping Cart' ? 'active' : '')) Cart
+          li: a(href='/login' class=(title === 'Login' ? 'active' : '')) Login
           li: a(href='/register') Register
 
     main.content
