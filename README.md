@@ -68,6 +68,14 @@ Set a `PORT` environment variable to override: `PORT=4000 npm start`
 
 ---
 
+## Live Demo
+
+The app is deployed on an Oracle Cloud Ubuntu server and is publicly accessible at:
+
+**http://163.192.9.119:3000**
+
+---
+
 ## HTML Pages
 
 These routes serve rendered Pug templates.
