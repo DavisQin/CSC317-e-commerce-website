@@ -20,6 +20,3 @@ INSERT OR IGNORE INTO products (name, price, stock, brand, category, image_url) 
     ('two-piece suit',         399.00,   6, 'Calvin Klein',      'suits',       'https://placehold.co/280x320/1a1a2e/ffffff?text=Two-Piece+Suit'),
     ('peacoat',                120.00,   7, 'H&M',               'coats',       'https://placehold.co/280x320/2e3a4a/ffffff?text=Peacoat'),
     ('chino shorts',            65.00,  11, 'Polo Ralph Lauren', 'shorts',      'https://placehold.co/280x320/1a5c2d/ffffff?text=Chino+Shorts');
-
-INSERT OR IGNORE INTO users (username, email, password) VALUES
-    ('testuser', 'test@example.com', 'hashedpassword123');

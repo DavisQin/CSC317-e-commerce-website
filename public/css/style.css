@@ -668,3 +668,71 @@ footer {
     color: #666;
     margin-top: 20px;
 }
+
+
+/* ── Keyframe animations ─────────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+    0%   { transform: scale(0) rotate(-8deg); opacity: 0; }
+    65%  { transform: scale(1.18) rotate(4deg); }
+    100% { transform: scale(1)   rotate(0deg); opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.22); }
+}
+
+
+/* ── Smooth transitions that were missing ────────────────────────────────── */
+
+.btn {
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.product-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-card {
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+}
+
+
+/* ── Hero: text slides up on page load ───────────────────────────────────── */
+
+.hero h1 {
+    animation: fadeInUp 0.55s ease both;
+}
+
+.hero p {
+    animation: fadeInUp 0.55s 0.1s ease both;
+}
+
+.hero .btn {
+    animation: fadeInUp 0.55s 0.2s ease both;
+}
+
+
+/* ── Order confirmation: checkmark pops in ───────────────────────────────── */
+
+.order-success-icon {
+    animation: popIn 0.5s 0.15s ease both;
+}
+
+
+/* ── Cart badge pulse (class added by JS) ────────────────────────────────── */
+
+.cart-badge-pulse {
+    animation: pulse 0.5s 0.4s ease both;
+    display: inline-block;
+}
