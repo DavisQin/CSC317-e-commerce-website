@@ -66,6 +66,17 @@ document.querySelectorAll('.navbar a[href="/cart"]').forEach(link => {
   }
 });
 
+// ── Hamburger menu toggle ─────────────────────────────────────────────────────
+
+const navToggle = document.querySelector('.nav-toggle');
+const navList = document.querySelector('.navbar ul');
+if (navToggle && navList) {
+  navToggle.addEventListener('click', () => {
+    navList.classList.toggle('nav-open');
+    navToggle.textContent = navList.classList.contains('nav-open') ? '✕' : '☰';
+  });
+}
+
 // ── Order list cards slide-in ─────────────────────────────────────────────────
 
 document.querySelectorAll('.order-card').forEach((card, i) => {

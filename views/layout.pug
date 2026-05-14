@@ -8,6 +8,7 @@ html(lang='en')
   body
     nav.navbar
       a.brand(href='/') MenStyle
+      button.nav-toggle(type='button' aria-label='Toggle navigation') ☰
       ul
         li: a(href='/' class=(title === "Men's Clothing Store" ? 'active' : '')) Home
         li: a(href='/products' class=(title === 'All Products' ? 'active' : '')) Products
