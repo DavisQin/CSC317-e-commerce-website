@@ -9,8 +9,10 @@ block content
   .categories-section
     h2 Shop by Category
     .category-grid
-      each cat in ['jeans', 'shirts', 't-shirts', 'jackets', 'sweaters', 'suits', 'pants', 'coats', 'shorts', 'accessories']
-        a.category-card(href='/products?category=' + cat)= cat
+      each cat in [['jeans','👖'],['shirts','👔'],['t-shirts','👕'],['jackets','🧥'],['sweaters','🧶'],['suits','🤵'],['pants','👖'],['coats','🥼'],['shorts','🩳'],['accessories','👜']]
+        a.category-card(href='/products?category=' + cat[0])
+          span.cat-icon= cat[1]
+          span= cat[0]
 
   if featured && featured.length
     .featured-section

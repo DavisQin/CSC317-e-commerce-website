@@ -5,8 +5,8 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 
-const { db, getCartItems, calcTotal, findProductByName } = require('./db/database');
-
+const { db, getCartItems, findProductByName } = require('./db/database');
+const { validateProduct, calcTotal, VALID_CATEGORIES } = require('./helpers/methods');
 const app = express();
 const PORT = 3000;
 
@@ -36,33 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const VALID_CATEGORIES = ['jeans', 'shirts', 't-shirts', 'jackets', 'pants', 'shorts', 'sweaters', 'coats', 'suits', 'accessories'];
 
-function validateProduct(body) {
-  const errors = [];
-
-  if (!body.name || typeof body.name !== 'string' || !body.name.trim()) {
-    errors.push('name is required and must be a non-empty string');
-  }
-
-  if (!body.category || typeof body.category !== 'string') {
-    errors.push('category is required and must be a string');
-  } else if (!VALID_CATEGORIES.includes(body.category.trim().toLowerCase())) {
-    errors.push('category must be one of: ' + VALID_CATEGORIES.join(', '));
-  }
-
-  if (!body.brand || typeof body.brand !== 'string' || !body.brand.trim()) {
-    errors.push('brand is required and must be a non-empty string');
-  }
-
-  if (body.price === undefined || body.price === null) {
-    errors.push('price is required');
-  } else if (typeof body.price !== 'number' || isNaN(body.price) || body.price <= 0) {
-    errors.push('price must be a positive number');
-  }
-
-  return errors;
-}
 
 // ─── HOME ────────────────────────────────────────────────────────────────────
 

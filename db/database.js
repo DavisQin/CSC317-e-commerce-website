@@ -24,16 +24,10 @@ function getCartItems(userId) {
   `).all(userId);
 }
 
-function calcTotal(items) {
-  let total = 0;
-  for (const item of items) {
-    total += item.price * item.quantity;
-  }
-  return total;
-}
+
 
 function findProductByName(name) {
   return db.prepare('SELECT * FROM products WHERE LOWER(name) = ?').get(name.trim().toLowerCase());
 }
 
-module.exports = { db, getCartItems, calcTotal, findProductByName };
+module.exports = { db, getCartItems, findProductByName };
