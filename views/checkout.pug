@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .checkout-container
+    h1 Checkout
+    table.cart-table
+      thead
+        tr
+          th Item
+          th Price
+          th Qty
+          th Subtotal
+      tbody
+        each item in items
+          tr
+            td= item.name
+            td $#{item.price.toFixed(2)}
+            td= item.quantity
+            td $#{(item.price * item.quantity).toFixed(2)}
+    .cart-total
+      strong Order Total: $#{total}
+    p.checkout-note No payment needed — this is a school project demo.
+    .cart-actions
+      a.btn(href='/cart') Back to Cart
+      form(action='/checkout' method='POST' style='display:inline')
+        button.btn.btn-success(type='submit') Place Order

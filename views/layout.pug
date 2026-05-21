@@ -1,0 +1,36 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title || "Men's Clothing Store"
+    link(rel='preconnect', href='https://fonts.googleapis.com')
+    link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin='')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap')
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    nav.navbar
+      a.brand(href='/') MenStyle
+      button.nav-toggle(type='button' aria-label='Toggle navigation') ☰
+      ul
+        li: a(href='/' class=(title === "Men's Clothing Store" ? 'active' : '')) Home
+        li: a(href='/products' class=(title === 'All Products' ? 'active' : '')) Products
+        if currentUser
+          li: a(href='/orders') My Orders
+          li: a(href='/cart') Cart#{cartCount > 0 ? ' (' + cartCount + ')' : ''}
+          li: span.nav-user Hi, #{currentUser.username}
+          li
+            form(action='/logout' method='POST' style='display:inline')
+              button.btn-nav(type='submit') Logout
+        else
+          li: a(href='/cart' class=(title === 'Shopping Cart' ? 'active' : '')) Cart
+          li: a(href='/login' class=(title === 'Login' ? 'active' : '')) Login
+          li: a(href='/register') Register
+
+    main.content
+      block content
+
+    footer
+      p &copy; 2026 MenStyle &mdash; CSC317 Group Project | Lior Elbert &amp; Davis Qin
+
+    script(src='/js/animations.js')

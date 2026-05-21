@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  .hero
+    h1 Welcome to MenStyle
+    p Your go-to store for premium men's clothing.
+    a.btn(href='/products') Browse All Products
+
+  .categories-section
+    h2 Shop by Category
+    .category-grid
+      each cat in [['jeans','👖'],['shirts','👔'],['t-shirts','👕'],['jackets','🧥'],['sweaters','🧶'],['suits','🤵'],['pants','👖'],['coats','🥼'],['shorts','🩳'],['accessories','👜']]
+        a.category-card(href='/products?category=' + cat[0])
+          span.cat-icon= cat[1]
+          span= cat[0]
+
+  if featured && featured.length
+    .featured-section
+      h2 Featured Products
+      .product-grid
+        each product in featured
+          .product-card
+            img.product-img(src=product.image_url || 'https://placehold.co/280x320/1a1a2e/ffffff?text=' + encodeURIComponent(product.name) alt=product.name)
+            .product-card-body
+              h2: a(href='/products/' + encodeURIComponent(product.name))= product.name
+              p.brand= product.brand
+              p.price $#{product.price.toFixed(2)}
+              if product.stock > 0
+                span.badge.in-stock In Stock
+                form(action='/cart/add' method='POST')
+                  input(type='hidden' name='product_id' value=product.id)
+                  button.btn.btn-add(type='submit') Add to Cart
+              else
+                span.badge.out-of-stock Out of Stock

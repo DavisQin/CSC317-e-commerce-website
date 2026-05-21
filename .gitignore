@@ -1,5 +1,10 @@
 node_modules/
 .env
+<<<<<<< HEAD
 dist/
 coverage/
 .DS_Store
+=======
+.DS_Store
+db/store.db
+>>>>>>> b10be41fc3926debb44d3d7ff2e5cc743226920b

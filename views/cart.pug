@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  .cart-container
+    h1 Shopping Cart
+    if items && items.length
+      table.cart-table
+        thead
+          tr
+            th Item
+            th Price
+            th Qty
+            th Subtotal
+            th
+        tbody
+          each item in items
+            tr
+              td= item.name
+              td $#{item.price.toFixed(2)}
+              td
+                form(action='/cart/update' method='POST' style='display:inline-flex;gap:6px;align-items:center')
+                  input(type='hidden' name='product_id' value=item.product_id)
+                  input.qty-input(type='number' name='quantity' value=item.quantity min='1' max='99')
+                  button.btn.btn-small(type='submit') Update
+              td $#{(item.price * item.quantity).toFixed(2)}
+              td
+                form(action='/cart/remove' method='POST')
+                  input(type='hidden' name='product_id' value=item.product_id)
+                  button.btn.btn-danger(type='submit') Remove
+      .cart-total
+        strong Total: $#{total}
+      .cart-actions
+        a.btn(href='/products') Continue Shopping
+        a.btn.btn-success(href='/checkout') Proceed to Checkout
+    else
+      p Your cart is empty.
+      a.btn(href='/products') Browse Products

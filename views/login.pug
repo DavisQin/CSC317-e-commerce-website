@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .login-container
+    h1 Login
+    if error
+      p.form-error= error
+    form(action='/login', method='POST')
+      .form-group
+        label(for='username') Username
+        input#username(type='text', name='username', placeholder='Enter your username', required)
+      .form-group
+        label(for='password') Password
+        input#password(type='password', name='password', placeholder='Enter your password', required)
+      button.btn(type='submit') Login
+    p.form-alt Don't have an account? #[a(href='/register') Register]

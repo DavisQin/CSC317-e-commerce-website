@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .order-confirm
+    .order-success-icon ✓
+    h1 Order Placed!
+    p.order-meta
+      | Order ##{order.id} &bull; #{new Date(order.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+    table.cart-table
+      thead
+        tr
+          th Item
+          th Price
+          th Qty
+          th Subtotal
+      tbody
+        each item in items
+          tr
+            td= item.name
+            td $#{item.price.toFixed(2)}
+            td= item.quantity
+            td $#{(item.price * item.quantity).toFixed(2)}
+    .cart-total
+      strong Total: $#{order.total.toFixed(2)}
+    .cart-actions
+      a.btn(href='/orders') View All Orders
+      a.btn(href='/products' style='margin-left:10px') Continue Shopping
